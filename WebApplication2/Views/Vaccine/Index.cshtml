@@ -1,0 +1,84 @@
+﻿@model List<WebApplication2.Models.Vaccine>
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="container p-3 bg-white">
+    <div class="row pt-2">
+        <div class="col-6">
+            <h2 class="text-primary">Vaccine List</h2>
+
+        </div>
+        <div class="col-6 text-right">
+            <a asp-controller="Vaccine" asp-action="Create" class="btn btn-primary">
+                <i class="fas fa-plus"></i> &nbsp; Create new Vaccine
+            </a>
+        </div>
+    </div>
+
+    <br /><br />
+
+    @if (Model.Count() > 0)
+    {
+ <table class="table table-bordered table-striped" style="width:100%">
+     <thead>
+         <tr>
+             <th>
+                 FirstName
+             </th>
+             <th>
+                 LastName
+             </th>
+             <th>
+                 Birthday
+             </th>
+             <th>
+                 City
+             </th>
+             <th>
+                 DayOfVaccination
+             </th>
+             <th>
+                 VaccineName
+             </th>
+             <th>
+                 VaccineDose
+             </th>
+             <th></th>
+         </tr>
+     </thead>
+     <tbody>
+         @foreach (WebApplication2.Models.Vaccine vaccine in Model)
+         {
+             <tr>
+                 <td width="50%">@vaccine.FirstName</td>
+                 <td width="30%">@vaccine.LastName</td>
+                 <td width="30%">@vaccine.Birthday</td>
+                 <td width="30%">@vaccine.City</td>
+                 <td width="30%">@vaccine.DayOfVaccination</td>
+                 <td width="30%">@vaccine.VaccineName</td>
+                 <td width="30%">@vaccine.VaccineDose</td>
+                 <td class="text-center">
+                     <div class="w-75 btn-group" role="group">
+                         <a asp-controller="Vaccine" asp-route-Id="@vaccine.Id" asp-action="Edit" class="btn btn-primary mx-2">
+                             <i class="fas fa-edit"></i>
+                         </a><a asp-controller="Vaccine" asp-route-Id="@vaccine.Id" asp-action="Remove" class="btn btn-danger mx-3">
+                             <i class="fas fa-trash-alt"></i>
+                         </a>
+                     </div>
+
+                 </td>
+             </tr>
+         }
+     </tbody>
+ </table>
+
+    }
+    else
+    {
+        <p>No List exists</p>
+    }
+
+</div>
+ 
